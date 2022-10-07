@@ -15,8 +15,44 @@ import {
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { Header } from '../components/Header/index';
+import auth from '../config/firebaseconfig';
+import userModel from "../Model/userModel";
+import { signInWithEmailAndPassword } from "firebase/auth";
+export var idUser;
 
 export default function Login() {
+
+    var erro;
+var idUser;
+var nomeUser;
+    function addUser(){
+        let UserModel = userModel();
+        UserModel.email = document.getElementById("email").value;
+        UserModel.password = document.getElementById("password").value;
+
+        signInWithEmailAndPassword(auth, UserModel.email, UserModel.password)
+        .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            router.push('/home-page');
+            idUser = user.id;
+            nomeUser = user.displayName;
+            preencherDados(user.id);
+            console.log(user.uid);
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            if(errorMessage != null){
+                erro = 'Teste Erro';
+                document.getElementById("testeErro").innerHTML = "Usuário não existente!";
+                console.log(erro);
+            }
+            //router.push('/home-page');
+            // ..
+          });
+    }
+
     const router = useRouter();
 
     return (
@@ -66,14 +102,21 @@ export default function Login() {
                                     _hover={{
                                         bg: 'blue.500',
                                     }}
-                                    onClick={() => router.push('/home-page')}
+                                    onClick={() => addUser()}
+                                    
                                 >
                                     Entrar
                                 </Button>
+                                <h5 style={{color: 'red'}} id='testeErro'></h5>
                             </Stack>
                         </Stack>
                     </Box>
                 </Stack>
             </Flex></>
     );
+}
+
+export function preencherDados(uidUsuario){
+    idUser = uidUsuario
+    console.log(uidUsuario);
 }
