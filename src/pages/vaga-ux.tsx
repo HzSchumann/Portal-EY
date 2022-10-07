@@ -10,8 +10,30 @@ import {
     Button,
 } from '@chakra-ui/react';
 import router from 'next/router';
+import { doc, setDoc } from "firebase/firestore";
+import db from "../config/firebase";
 
 export default function EstagFront() {
+
+    const nomeU = new URLSearchParams(window.location.search).get("name");
+    const reqU = new URLSearchParams(window.location.search).get("requisitos");
+    const desU = new URLSearchParams(window.location.search).get("descricao");
+    const cueU = new URLSearchParams(window.location.search).get("comoUsamosEy");
+
+    async function adicionarProposta(){
+
+        const docData = {
+            descricao: new URLSearchParams(window.location.search).get("descricao"),
+            comoUsamosEy: new URLSearchParams(window.location.search).get("comoUsamosEy"),
+            name:  new URLSearchParams(window.location.search).get("name"),
+            requisitos: new URLSearchParams(window.location.search).get("requisitos"),
+            nivel: new URLSearchParams(window.location.search).get("nivel")
+        };
+
+        await setDoc(doc(db, "MinhasVagas", `Empresa ${new URLSearchParams(window.location.search).get("name")}`), docData);
+        router.push('/minhas-vagas');
+    }
+
     return (
 
         <>
@@ -21,7 +43,7 @@ export default function EstagFront() {
 
                 <Center mt="2rem" mb="2rem">
                     <Box w="60%" mr="4" rounded='md' text-align='center' ml="2rem">
-                        <Heading color="White">Estágio User Experience</Heading>
+                        <Heading color="White">{nomeU}</Heading>
                     </Box >
                 </Center>
 
@@ -34,9 +56,7 @@ export default function EstagFront() {
                 <Center mt="2rem" mb="2rem">
                 <Box w="60%" mr="4" rounded='md' text-align='center' ml="2rem" mb="3rem">
                     <Text color="white">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula vel tortor eu lobortis. Nunc nec arcu vel tellus ultrices volutpat. Duis ut augue at magna congue porta sit amet quis lorem. Donec elementum viverra iaculis. Suspendisse in velit eu nunc porttitor euismod vehicula nec tellus. Vivamus eu ligula commodo, molestie metus sit amet, laoreet mauris. Cras sit amet odio sit amet massa sollicitudin elementum a in ante. Pellentesque eget quam enim.
-
-                        Cras fringilla diam nulla. Integer dolor sit amet lectus maximus cursus. Sed condimentum sapien sed ante ullamcorper facilisis. Nam tellus eros, faucibus nec dictum nec, tempus a diam. Nunc condimentum venenatis consequat. Donec pulvinar sem sapien, sit amet eleifend lorem tincidunt quis. Mauris consectetur, neque nec ultricies malesuada, nunc nibh scelerisque velit, at egestas elit urna vitae odio. Quisque tristique urna nec vestibulum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas auctor sodales lacus, eget fringilla sapien vulputate eu.
+                        {desU}
                     </Text>
                     </Box >
                 </Center>
@@ -50,9 +70,7 @@ export default function EstagFront() {
                 <Center mt="2rem" mb="2rem">
                 <Box w="60%" mr="4" rounded='md' text-align='center' ml="2rem" mb="3rem">
                     <Text color="white">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula vel tortor eu lobortis. Nunc nec arcu vel tellus ultrices volutpat. Duis ut augue at magna congue porta sit amet quis lorem. Donec elementum viverra iaculis. Suspendisse in velit eu nunc porttitor euismod vehicula nec tellus. Vivamus eu ligula commodo, molestie metus sit amet, laoreet mauris. Cras sit amet odio sit amet massa sollicitudin elementum a in ante. Pellentesque eget quam enim.
-
-                        Cras fringilla diam nulla. Integer dolor sit amet lectus maximus cursus. Sed condimentum sapien sed ante ullamcorper facilisis. Nam tellus eros, faucibus nec dictum nec, tempus a diam. Nunc condimentum venenatis consequat. Donec pulvinar sem sapien, sit amet eleifend lorem tincidunt quis. Mauris consectetur, neque nec ultricies malesuada, nunc nibh scelerisque velit, at egestas elit urna vitae odio. Quisque tristique urna nec vestibulum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas auctor sodales lacus, eget fringilla sapien vulputate eu.
+                    {cueU}
                     </Text>
                     </Box >
                 </Center>
@@ -66,9 +84,7 @@ export default function EstagFront() {
                 <Center mt="2rem" mb="2rem">
                 <Box w="60%" mr="4" rounded='md' text-align='center' ml="2rem" mb="3rem">
                     <Text color="white">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula vel tortor eu lobortis. Nunc nec arcu vel tellus ultrices volutpat. Duis ut augue at magna congue porta sit amet quis lorem. Donec elementum viverra iaculis. Suspendisse in velit eu nunc porttitor euismod vehicula nec tellus. Vivamus eu ligula commodo, molestie metus sit amet, laoreet mauris. Cras sit amet odio sit amet massa sollicitudin elementum a in ante. Pellentesque eget quam enim.
-
-                        Cras fringilla diam nulla. Integer dolor sit amet lectus maximus cursus. Sed condimentum sapien sed ante ullamcorper facilisis. Nam tellus eros, faucibus nec dictum nec, tempus a diam. Nunc condimentum venenatis consequat. Donec pulvinar sem sapien, sit amet eleifend lorem tincidunt quis. Mauris consectetur, neque nec ultricies malesuada, nunc nibh scelerisque velit, at egestas elit urna vitae odio. Quisque tristique urna nec vestibulum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas auctor sodales lacus, eget fringilla sapien vulputate eu.
+                        {reqU}
                     </Text>
                     </Box >
                 </Center>
@@ -76,7 +92,7 @@ export default function EstagFront() {
                 <Center mt="2rem" mb="2rem">
                     <Box w="60%" mr="4" rounded='md' text-align='center' ml="2rem" mb="3rem">
                     <Button
-                                        onClick={() => router.push('/minhas-vagas')}
+                                        onClick={() => adicionarProposta()}
                                         w="100%"
                                         flex={1}
                                         fontSize={'sm'}

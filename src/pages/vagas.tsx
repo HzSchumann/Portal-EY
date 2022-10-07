@@ -15,8 +15,104 @@ import {
 } from '@chakra-ui/react';
 import router from 'next/router';
 import { Search2Icon } from '@chakra-ui/icons';
+import db from "../config/firebase";
+import { useState, useEffect } from 'react';
+import { collection, query, where, onSnapshot } from "firebase/firestore";
 
 export default function Vagas() {
+
+    const [allCampaigns, setProposta] = useState([]);
+
+    const q = query(collection(db, "Vagas"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const propostas = [];
+    
+        querySnapshot.forEach((doc) => {
+            propostas.push({...doc.data(), id: doc.id});
+            unsubscribe()
+        });
+        console.log(propostas);
+    
+
+    setProposta(propostas);
+
+    });
+
+    if(allCampaigns.length > 0){
+        unsubscribe()
+        console.log(allCampaigns.length)
+    }
+
+    function Item(props){
+        return(
+            
+
+        <Center >
+                    <Box mb="7rem" h="100px" w="60%" p="0.5rem">
+                        <Stack
+                            borderWidth="1px"
+                            borderRadius="lg"
+                            borderColor="gray.700"
+                            w='100%'
+                            height='200px'
+                            direction={{ base: 'column', md: 'row' }}
+                            bg={useColorModeValue('backgroundBlack.700', 'gray.900')}
+                            boxShadow={'2xl'}
+                            padding={4}>
+                            
+                            <Stack
+                                flex={1}
+                                flexDirection="column"
+                                justifyContent="Center"
+                                alignItems="left"
+                                p={1}
+                                pt={2}>
+                                <Heading fontSize={'2xl'} fontFamily={'body'} color="white">
+                                    {props.proposta.name}
+                                </Heading>
+                                <Text
+                                    textAlign={'left'}
+                                    color={useColorModeValue('white', 'gray.400')}>
+                                    Nível: Estágio
+                                </Text>
+                            </Stack>
+                            <Stack
+                                alignItems={'center'}
+                                justifyContent={'center'}
+                            >
+
+                                <Stack
+                                    width={'300px'}
+                                    mt={'2rem'}
+                                    direction={'row'}
+                                >
+                                    <Button
+                                        onClick={() => router.push('/vaga-ux?idproposta=' + props.proposta.id + '&requisitos=' + props.proposta.requisitos + '&descricao=' + props.proposta.descricao + '&name=' + props.proposta.name + '&comoUsamosEy=' + props.proposta.comoUsamosEy + '&nivel=' + props.proposta.nivel)}
+                                        flex={1}
+                                        fontSize={'sm'}
+                                        bg={'yellowPrimary.800'}
+                                        color={'black'}
+                                        boxShadow={
+                                            '0px 1px 25px -5px rgb(247 244 30 / 48%), 0 10px 10px -5px rgb(247 244 30 / 43%)'
+                                        }
+                                        _hover={{
+                                            bg: 'yellowPrimary.500',
+                                        }}
+                                        _focus={{
+                                            bg: 'yellowPrimary.500',
+                                        }}>
+                                        Ver Vaga
+                                    </Button>
+                                </Stack>
+                            </Stack>
+                        </Stack>
+                    </Box>
+                </Center>
+
+        )
+    }
+
+
     return (
 
         <>
@@ -48,252 +144,8 @@ export default function Vagas() {
                             </InputGroup>
                         </Box>
                 </Center>
-
-                <Center >
-                    <Box mb="7rem" h="100px" w="60%" p="0.5rem">
-                        <Stack
-                            borderWidth="1px"
-                            borderRadius="lg"
-                            borderColor="gray.700"
-                            w='100%'
-                            height='200px'
-                            direction={{ base: 'column', md: 'row' }}
-                            bg={useColorModeValue('backgroundBlack.700', 'gray.900')}
-                            boxShadow={'2xl'}
-                            padding={4}>
-                            
-                            <Stack
-                                flex={1}
-                                flexDirection="column"
-                                justifyContent="Center"
-                                alignItems="left"
-                                p={1}
-                                pt={2}>
-                                <Heading fontSize={'2xl'} fontFamily={'body'} color="white">
-                                    Estágio User Experience
-                                </Heading>
-                                <Text
-                                    textAlign={'left'}
-                                    color={useColorModeValue('white', 'gray.400')}>
-                                    Nível: Estágio
-                                </Text>
-                            </Stack>
-                            <Stack
-                                alignItems={'center'}
-                                justifyContent={'center'}
-                            >
-
-                                <Stack
-                                    width={'300px'}
-                                    mt={'2rem'}
-                                    direction={'row'}
-                                >
-                                    <Button
-                                        onClick={() => router.push('/vaga-ux')}
-                                        flex={1}
-                                        fontSize={'sm'}
-                                        bg={'yellowPrimary.800'}
-                                        color={'black'}
-                                        boxShadow={
-                                            '0px 1px 25px -5px rgb(247 244 30 / 48%), 0 10px 10px -5px rgb(247 244 30 / 43%)'
-                                        }
-                                        _hover={{
-                                            bg: 'yellowPrimary.500',
-                                        }}
-                                        _focus={{
-                                            bg: 'yellowPrimary.500',
-                                        }}>
-                                        Ver Vaga
-                                    </Button>
-                                </Stack>
-                            </Stack>
-                        </Stack>
-                    </Box>
-                </Center>
-
-                <Center>
-                    <Box mb="7rem" h="100px" w="60%" p="0.5rem">
-                        <Stack
-                            borderWidth="1px"
-                            borderRadius="lg"
-                            borderColor="gray.700"
-                            w='100%'
-                            height='200px'
-                            direction={{ base: 'column', md: 'row' }}
-                            bg={useColorModeValue('backgroundBlack.700', 'gray.900')}
-                            boxShadow={'2xl'}
-                            padding={4}>
-                            <Stack
-                                flex={1}
-                                flexDirection="column"
-                                justifyContent="Center"
-                                alignItems="left"
-                                p={1}
-                                pt={2}>
-                                <Heading fontSize={'2xl'} fontFamily={'body'} color="white">
-                                    Talent Trainee
-                                </Heading>
-                                <Text
-                                    textAlign={'left'}
-                                    color={useColorModeValue('white', 'gray.400')}>
-                                    Nível: Trainee
-                                </Text>
-                            </Stack>
-                            <Stack
-                                alignItems={'center'}
-                                justifyContent={'center'}
-                            >
-
-                                <Stack
-                                    width={'300px'}
-                                    mt={'2rem'}
-                                    direction={'row'}
-                                >
-                                    <Button
-                                        onClick={() => router.push('/vaga-trainee')}
-                                        flex={1}
-                                        fontSize={'sm'}
-                                        bg={'yellowPrimary.800'}
-                                        color={'black'}
-                                        boxShadow={
-                                            '0px 1px 25px -5px rgb(247 244 30 / 48%), 0 10px 10px -5px rgb(247 244 30 / 43%)'
-                                        }
-                                        _hover={{
-                                            bg: 'yellowPrimary.500',
-                                        }}
-                                        _focus={{
-                                            bg: 'yellowPrimary.500',
-                                        }}>
-                                        Ver Vaga
-                                    </Button>
-                                </Stack>
-                            </Stack>
-                        </Stack>
-                    </Box>
-                </Center>                    
-
-
-                <Center>
-                    <Box mb="7rem" h="100px" w="60%" p="0.5rem">
-                        <Stack
-                            borderWidth="1px"
-                            borderRadius="lg"
-                            borderColor="gray.700"
-                            w='100%'
-                            height='200px'
-                            direction={{ base: 'column', md: 'row' }}
-                            bg={useColorModeValue('backgroundBlack.700', 'gray.900')}
-                            boxShadow={'2xl'}
-                            padding={4}>
-                            <Stack
-                                flex={1}
-                                flexDirection="column"
-                                justifyContent="Center"
-                                alignItems="left"
-                                p={1}
-                                pt={2}>
-                                <Heading fontSize={'2xl'} fontFamily={'body'} color="white">
-                                    QA Engineer Júnior
-                                </Heading>
-                                <Text
-                                    textAlign={'left'}
-                                    color={useColorModeValue('white', 'gray.400')}>
-                                    Nível: Júnior
-                                </Text>
-                            </Stack>
-                            <Stack
-                                alignItems={'center'}
-                                justifyContent={'center'}
-                            >
-
-                                <Stack
-                                    width={'300px'}
-                                    mt={'2rem'}
-                                    direction={'row'}
-                                >
-                                    <Button
-                                        onClick={() => router.push('/vaga-qa')}
-                                        flex={1}
-                                        fontSize={'sm'}
-                                        bg={'yellowPrimary.800'}
-                                        color={'black'}
-                                        boxShadow={
-                                            '0px 1px 25px -5px rgb(247 244 30 / 48%), 0 10px 10px -5px rgb(247 244 30 / 43%)'
-                                        }
-                                        _hover={{
-                                            bg: 'yellowPrimary.500',
-                                        }}
-                                        _focus={{
-                                            bg: 'yellowPrimary.500',
-                                        }}>
-                                        Ver Vaga
-                                    </Button>
-                                </Stack>
-                            </Stack>
-                        </Stack>
-                    </Box>
-                </Center>
-
-                <Center>
-                    <Box mb="7rem" h="100px" w="60%" p="0.5rem">
-                        <Stack
-                            borderWidth="1px"
-                            borderRadius="lg"
-                            borderColor="gray.700"
-                            w='100%'
-                            height='200px'
-                            direction={{ base: 'column', md: 'row' }}
-                            bg={useColorModeValue('backgroundBlack.700', 'gray.900')}
-                            boxShadow={'2xl'}
-                            padding={4}>
-                            <Stack
-                                flex={1}
-                                flexDirection="column"
-                                justifyContent="Center"
-                                alignItems="left"
-                                p={1}
-                                pt={2}>
-                                <Heading fontSize={'2xl'} fontFamily={'body'} color="white">
-                                    Project Management - PMO
-                                </Heading>
-                                <Text
-                                    textAlign={'left'}
-                                    color={useColorModeValue('white', 'gray.400')}>
-                                    Nível: Sênior
-                                </Text>
-                            </Stack>
-                            <Stack
-                                alignItems={'center'}
-                                justifyContent={'center'}
-                            >
-
-                                <Stack
-                                    width={'300px'}
-                                    mt={'2rem'}
-                                    direction={'row'}
-                                >
-                                    <Button
-                                        onClick={() => router.push('/vaga-pmo')}
-                                        flex={1}
-                                        fontSize={'sm'}
-                                        bg={'yellowPrimary.800'}
-                                        color={'black'}
-                                        boxShadow={
-                                            '0px 1px 25px -5px rgb(247 244 30 / 48%), 0 10px 10px -5px rgb(247 244 30 / 43%)'
-                                        }
-                                        _hover={{
-                                            bg: 'yellowPrimary.500',
-                                        }}
-                                        _focus={{
-                                            bg: 'yellowPrimary.500',
-                                        }}>
-                                        Ver Vaga
-                                    </Button>
-                                </Stack>
-                            </Stack>
-                        </Stack>
-                    </Box>
-                </Center>
+                {allCampaigns.map((proposta)=> <Item key={proposta.id} proposta={proposta}/>)}
+                
             </Stack>
 
         </>

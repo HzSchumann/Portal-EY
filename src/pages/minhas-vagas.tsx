@@ -5,6 +5,10 @@ import router from "../../node_modules/next/router";
 import { LogedHeader } from "../components/logedHeader/index";
 import CardProposta from "../components/Notificacoes/cardProposta";
 import CardVizualizou from "../components/Notificacoes/cardVizualizou";
+import db from "../config/firebase";
+import db2 from "../config/firebase";
+import { useState, useEffect } from 'react';
+import { collection, query, where, onSnapshot } from "firebase/firestore";
 
 
 export default function MinhasVagas() {
@@ -13,18 +17,116 @@ export default function MinhasVagas() {
     const { isOpen: isOpenStatusEntrevista, onOpen: onOpenStatusEntrevista, onClose: onCloseStatusEntrevista } = useDisclosure()
     const { isOpen: isOpenStatusFinal, onOpen: onOpenStatusFinal, onClose: onCloseStatusFinal } = useDisclosure()
 
-    return (
+    const [allCampaigns, setProposta] = useState([]);
 
-        <>
-            <LogedHeader>
-            </LogedHeader>
-            <Stack minH={'100vh'} bg="backgroundBlack.700">
+    const q = query(collection(db, "Vagas"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const propostas = [];
+    
+        querySnapshot.forEach((doc) => {
+            propostas.push({...doc.data(), id: doc.id});
+            unsubscribe()
+        });
+        console.log(propostas);
+    
 
-                <Center mt="2rem" mb="2rem">
-                    <Box w="60%" mr="4" rounded='md' text-align='center'>
-                        <Heading color="white">Meus Processos Seletivos</Heading>
-                    </Box >
+    setProposta(propostas);
+
+    });
+
+    const [todasEmpresas, setEmpresa] = useState([]);
+
+    const q2 = query(collection(db2, "MinhasVagas"));
+    const unsubscribe2 = onSnapshot(q2, (querySnapshot) => {
+    const propostas2 = [];
+    
+        querySnapshot.forEach((doc) => {
+            propostas2.push({...doc.data(), id: doc.id});
+            unsubscribe2()
+        });
+        console.log(propostas2);
+    
+
+        setEmpresa(propostas2);
+
+    });
+    if(todasEmpresas.length > 0){
+        unsubscribe2()
+        console.log(todasEmpresas.length)
+    }
+
+    if(allCampaigns.length > 0){
+        unsubscribe()
+        console.log(allCampaigns.length)
+    }
+
+    function Item(props){
+        return(
+            <Center >
+                    <Box mb="7rem" h="100px" w="60%" p="0.5rem">
+                        <Stack
+                            borderWidth="1px"
+                            borderRadius="lg"
+                            borderColor="gray.700"
+                            w='100%'
+                            height='200px'
+                            direction={{ base: 'column', md: 'row' }}
+                            bg={'backgroundBlack.700'}
+                            boxShadow={'2xl'}
+                            padding={4}>
+
+                            <Stack
+                                flex={1}
+                                flexDirection="column"
+                                justifyContent="Center"
+                                alignItems="left"
+                                p={1}
+                                pt={2}>
+                                <Heading fontSize={'2xl'} fontFamily={'body'} color="white">
+                                    {props.proposta.name}
+                                </Heading>
+                                <Text
+                                    textAlign={'left'}
+                                    color='white'>
+                                    Nível: Estágio
+                                </Text>
+                            </Stack>
+                            <Stack
+                                alignItems={'center'}
+                                justifyContent={'center'}
+                            >
+
+                                <Stack
+                                    width={'300px'}
+                                    mt={'2rem'}
+                                    direction={'row'}
+                                >
+                                    <Button
+                                        onClick={() => router.push('/vaga-ux?idproposta=' + props.proposta.id + '&requisitos=' + props.proposta.requisitos + '&descricao=' + props.proposta.descricao + '&name=' + props.proposta.name + '&comoUsamosEy=' + props.proposta.comoUsamosEy + '&nivel=' + props.proposta.nivel)}
+                                        flex={1}
+                                        fontSize={'sm'}
+                                        bg={'backgroundBlack.700'}
+                                        color={'yellowPrimary.800'}
+                                        border="1px" borderColor="gray.700" borderStyle={'solid'}
+                                        _hover={{
+                                            bg: 'gray.800',
+                                        }}
+                                        _focus={{
+                                            bg: 'gray.800',
+                                        }}>
+                                        Ver Vaga
+                                    </Button>
+                                </Stack>
+                            </Stack>
+                        </Stack>
+                    </Box>
                 </Center>
+        )
+    }
+
+    function Item2(props2){
+        return(
+            
 
                 <Center >
                     <Box mb="7rem" h="100px" w="60%" p="0.5rem">
@@ -47,12 +149,12 @@ export default function MinhasVagas() {
                                 p={1}
                                 pt={2}>
                                 <Heading fontSize={'2xl'} fontFamily={'body'} color="white">
-                                    Estágio em Engenharia
+                                    {props2.proposta2.name}
                                 </Heading>
                                 <Text
                                     textAlign={'left'}
                                     color='white'>
-                                    Nível: Estágio
+                                    {props2.proposta2.nivel}
                                 </Text>
                             </Stack>
                             <Stack
@@ -85,6 +187,26 @@ export default function MinhasVagas() {
                         </Stack>
                     </Box>
                 </Center>
+                    
+                
+        )
+    }
+
+
+    return (
+
+        <>
+            <LogedHeader>
+            </LogedHeader>
+            <Stack minH={'100vh'} bg="backgroundBlack.700">
+
+                <Center mt="2rem" mb="2rem">
+                    <Box w="60%" mr="4" rounded='md' text-align='center'>
+                        <Heading color="white">Meus Processos Seletivos</Heading>
+                    </Box >
+                </Center>
+
+                {todasEmpresas.map((proposta2)=> <Item2 key={proposta2.id} proposta2={proposta2}/>)}
 
                 <Center >
                     <Box mb="7rem" h="100px" w="60%" p="0.5rem">
@@ -247,67 +369,7 @@ export default function MinhasVagas() {
                         <Heading fontSize="24px" color="white">Sugestões de Vagas</Heading>
                     </Box >
                 </Center>
-
-                <Center >
-                    <Box mb="7rem" h="100px" w="60%" p="0.5rem">
-                        <Stack
-                            borderWidth="1px"
-                            borderRadius="lg"
-                            borderColor="gray.700"
-                            w='100%'
-                            height='200px'
-                            direction={{ base: 'column', md: 'row' }}
-                            bg={'backgroundBlack.700'}
-                            boxShadow={'2xl'}
-                            padding={4}>
-
-                            <Stack
-                                flex={1}
-                                flexDirection="column"
-                                justifyContent="Center"
-                                alignItems="left"
-                                p={1}
-                                pt={2}>
-                                <Heading fontSize={'2xl'} fontFamily={'body'} color="white">
-                                    Estágio User Experience
-                                </Heading>
-                                <Text
-                                    textAlign={'left'}
-                                    color='white'>
-                                    Nível: Estágio
-                                </Text>
-                            </Stack>
-                            <Stack
-                                alignItems={'center'}
-                                justifyContent={'center'}
-                            >
-
-                                <Stack
-                                    width={'300px'}
-                                    mt={'2rem'}
-                                    direction={'row'}
-                                >
-                                    <Button
-                                        onClick={() => router.push('/vaga-ux')}
-                                        flex={1}
-                                        fontSize={'sm'}
-                                        bg={'backgroundBlack.700'}
-                                        color={'yellowPrimary.800'}
-                                        border="1px" borderColor="gray.700" borderStyle={'solid'}
-                                        _hover={{
-                                            bg: 'gray.800',
-                                        }}
-                                        _focus={{
-                                            bg: 'gray.800',
-                                        }}>
-                                        Ver Vaga
-                                    </Button>
-                                </Stack>
-                            </Stack>
-                        </Stack>
-                    </Box>
-                </Center>
-
+                {allCampaigns.map((proposta)=> <Item key={proposta.id} proposta={proposta}/>)}
                 <Modal onClose={onCloseEnd} isOpen={isOpenEnd} isCentered>
                     <ModalOverlay />
                     <ModalContent>
