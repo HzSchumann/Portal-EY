@@ -16,6 +16,7 @@ export default function MinhasVagas() {
     const { isOpen: isOpenTime, onOpen: onOpenTime, onClose: onCloseTime } = useDisclosure()
     const { isOpen: isOpenStatusEntrevista, onOpen: onOpenStatusEntrevista, onClose: onCloseStatusEntrevista } = useDisclosure()
     const { isOpen: isOpenStatusFinal, onOpen: onOpenStatusFinal, onClose: onCloseStatusFinal } = useDisclosure()
+    const { isOpen: isOpenAcompanhe, onOpen: onOpenAcompanhe, onClose: onCloseAcompanhe } = useDisclosure()
 
     const [allCampaigns, setProposta] = useState([]);
 
@@ -126,7 +127,6 @@ export default function MinhasVagas() {
 
     function Item2(props2){
         return(
-             
 
                 <Center >
                     <Box mb="7rem" h="100px" w="60%" p="0.5rem">
@@ -168,7 +168,7 @@ export default function MinhasVagas() {
                                     direction={'row'}
                                 >
                                     <Button
-                                        onClick={onOpenStatusEntrevista}
+                                        onClick={onOpenAcompanhe}
                                         flex={1}
                                         fontSize={'sm'}
                                         bg={'backgroundBlack.700'}
@@ -198,7 +198,7 @@ export default function MinhasVagas() {
         <>
             <LogedHeader>
             </LogedHeader>
-            <Stack minH={'100vh'} bg="backgroundBlack.700">
+            <Stack minH={'150vh'} bg="backgroundBlack.700">
 
                 <Center mt="2rem" mb="2rem">
                     <Box w="60%" mr="4" rounded='md' text-align='center'>
@@ -207,6 +207,66 @@ export default function MinhasVagas() {
                 </Center>
 
                 {todasEmpresas.map((proposta2)=> <Item2 key={proposta2.id} proposta2={proposta2}/>)}
+
+                <Center >
+                    <Box mb="7rem" h="100px" w="60%" p="0.5rem">
+                        <Stack
+                            borderWidth="1px"
+                            borderRadius="lg"
+                            borderColor="gray.700"
+                            w='100%'
+                            height='200px'
+                            direction={{ base: 'column', md: 'row' }}
+                            bg={'backgroundBlack.700'}
+                            boxShadow={'2xl'}
+                            padding={4}>
+
+                            <Stack
+                                flex={1}
+                                flexDirection="column"
+                                justifyContent="Center"
+                                alignItems="left"
+                                p={1}
+                                pt={2}>
+                                <Heading fontSize={'2xl'} fontFamily={'body'} color="white">
+                                    Estágio em Back-End Dev
+                                </Heading>
+                                <Text
+                                    textAlign={'left'}
+                                    color='white'>
+                                    Nível: Estágio
+                                </Text>
+                            </Stack>
+                            <Stack
+                                alignItems={'center'}
+                                justifyContent={'center'}
+                            >
+
+                                <Stack
+                                    width={'300px'}
+                                    mt={'2rem'}
+                                    direction={'row'}
+                                >
+                                    <Button
+                                        onClick={() => router.push('/formulario-vaga')}
+                                        flex={1}
+                                        fontSize={'sm'}
+                                        bg={'backgroundBlack.700'}
+                                        color={'green.300'}
+                                        border="1px" borderColor="gray.700" borderStyle={'solid'}
+                                        _hover={{
+                                            bg: 'gray.800',
+                                        }}
+                                        _focus={{
+                                            bg: 'gray.800',
+                                        }}>
+                                        Enviar Informações
+                                    </Button>
+                                </Stack>
+                            </Stack>
+                        </Stack>
+                    </Box>
+                </Center>
 
                 <Center >
                     <Box mb="7rem" h="100px" w="60%" p="0.5rem">
@@ -534,10 +594,52 @@ export default function MinhasVagas() {
                         </ModalFooter>
                     </ModalContent>
                 </Modal>
+            
+            <Modal onClose={onCloseAcompanhe} size={'xl'} isOpen={isOpenAcompanhe} isCentered>
+                    <ModalOverlay />
+                    <ModalContent>
+                        <ModalHeader>Acompanhe seu processo!</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            <Center>
+                                <Progress w="100%" value={5} size='xs' colorScheme="yellow" mb="2rem" />
+                            </Center>
+
+                            <Box>
+                                <Flex>
+                                    <Text color={'yellow.600'}>Análise de Currículo</Text>
+                                    <Text>Realizar Atividades</Text>
+                                    <Text>Entrevista RH</Text>
+                                    <Text>Entrevista Gestor</Text>
+                                    <Text>Resposta Final</Text>
+                                </Flex>
+                            </Box>
+
+                            <Center>
+                                <Box mt="3rem" mb="3rem">
+                                    <Text ml="9rem">Status:</Text>
+                                    <Heading color="yellow.500">Análise de Currículo</Heading>
+                                </Box>
+                            </Center>
+
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button onClick={onCloseAcompanhe} bg={'yellowPrimary.800'}
+                                color={'black'}
+                                boxShadow={
+                                    '0px 1px 25px -5px rgb(247 244 30 / 48%), 0 10px 10px -5px rgb(247 244 30 / 43%)'
+                                }
+                                _hover={{
+                                    bg: 'yellowPrimary.500',
+                                }}
+                                _focus={{
+                                    bg: 'yellowPrimary.500',
+                                }}>Fechar</Button>
+
+                        </ModalFooter>
+                    </ModalContent>
+                </Modal>
             </Stack>
-
-
-
 
         </>
     )
