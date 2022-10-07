@@ -92,23 +92,23 @@ export default function Cadastro() {
 
                             <FormControl id="firstName" isRequired>
                                 <FormLabel color="white">Nome</FormLabel>
-                                <Input type="text" id="name"/>
+                                <Input type="text" id="name" color="white"/>
                             </FormControl>
 
 
                             <FormControl id="email" isRequired>
                                 <FormLabel color="white">Email</FormLabel>
-                                <Input type="email" id="email" />
+                                <Input type="email" id="email" color="white"/>
                             </FormControl>
                             <FormControl id="password" isRequired>
                                 <FormLabel color="white">Senha</FormLabel>
                                 <InputGroup>
-                                    <Input type={showPassword ? 'text' : 'password'} id="password"/>
+                                    <Input color="white" type={showPassword ? 'text' : 'password'} id="password"/>
                                     <InputRightElement h={'full'}>
                                         <Button
                                             variant={'ghost'}
                                             onClick={() => setShowPassword((showPassword) => !showPassword)}>
-                                            {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                                            {showPassword ? <ViewIcon color="white"/> : <ViewOffIcon color="white"/>}
                                         </Button>
                                     </InputRightElement>
                                 </InputGroup>

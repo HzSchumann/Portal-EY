@@ -53,7 +53,7 @@ export function LogedHeader() {
                                     pr='4.5rem'
                                     w="600px"
                                     variant='filled'
-                                    placeholder='Buscar'
+                                    placeholder='Buscar Cursos'
                                 />
                                 <InputRightElement width='4.5rem'>
                                     <Button bg='gray.600' leftIcon={<Search2Icon />} h='1.75rem' size='sm' onClick={() => router.push('/cursos')}></Button>
@@ -103,7 +103,7 @@ export function LogedHeader() {
                                     mr="1rem"
                                     size={'sm'}
                                     src={
-                                        'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
+                                        'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80'
                                     }
                                 />
                             </MenuButton>

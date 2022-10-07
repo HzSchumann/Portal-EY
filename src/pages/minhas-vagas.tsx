@@ -1,4 +1,4 @@
-import { Heading, Flex, Avatar, Spacer, Text, Box, Divider } from "@chakra-ui/react";
+import { Heading, Flex, Progress, Spacer, Text, Box, Divider, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter } from "@chakra-ui/react";
 import { Icon, GridItem, Stack } from '@chakra-ui/react'
 import { Button, ButtonGroup, Center } from '@chakra-ui/react'
 import router from "../../node_modules/next/router";
@@ -8,129 +8,474 @@ import CardVizualizou from "../components/Notificacoes/cardVizualizou";
 
 
 export default function MinhasVagas() {
+    const { isOpen: isOpenEnd, onOpen: onOpenEnd, onClose: onCloseEnd } = useDisclosure()
+    const { isOpen: isOpenTime, onOpen: onOpenTime, onClose: onCloseTime } = useDisclosure()
+    const { isOpen: isOpenStatusEntrevista, onOpen: onOpenStatusEntrevista, onClose: onCloseStatusEntrevista } = useDisclosure()
+    const { isOpen: isOpenStatusFinal, onOpen: onOpenStatusFinal, onClose: onCloseStatusFinal } = useDisclosure()
+
     return (
 
         <>
             <LogedHeader>
             </LogedHeader>
-            <Stack  minH={'100vh'} bg="backgroundBlack.700">
-                
+            <Stack minH={'100vh'} bg="backgroundBlack.700">
+
                 <Center mt="2rem" mb="2rem">
                     <Box w="60%" mr="4" rounded='md' text-align='center'>
                         <Heading color="white">Meus Processos Seletivos</Heading>
                     </Box >
                 </Center>
 
-                    <Center>
-                        <Box border="1px" borderColor="gray.700" borderStyle={'solid'} h="100px" w="60%" bg="black"
-                            borderRadius="lg" p="0.5rem" cursor="pointer">
-                                
+                <Center >
+                    <Box mb="7rem" h="100px" w="60%" p="0.5rem">
+                        <Stack
+                            borderWidth="1px"
+                            borderRadius="lg"
+                            borderColor="gray.700"
+                            w='100%'
+                            height='200px'
+                            direction={{ base: 'column', md: 'row' }}
+                            bg={'backgroundBlack.700'}
+                            boxShadow={'2xl'}
+                            padding={4}>
+
                             <Stack
                                 flex={1}
+                                flexDirection="column"
                                 justifyContent="Center"
                                 alignItems="left"
-                                direction={{ base: 'column', md: 'row' }}
                                 p={1}
-                                pt={2}
-                                onClick={() => router.push('/formulario-vaga')}>
-                                    <Box>
-                                        <Heading fontSize={'2xl'} fontFamily={'body'} color="white">
-                                            Estágio em Engenharia
-                                        </Heading>
-                                        <Text color="white">Nível: Estágio</Text>
-                                    </Box>
-                                    
-
-                                        <Stack
-                                            width={'300px'}
-                                            mt={'2rem'}
-                                            direction={'row'}
-                                            justifyContent={'right'}
-                                            alignItems={'center'}
-                                        >
-                                            <Text color="green">Enviar Informações</Text>
-                                        </Stack>
+                                pt={2}>
+                                <Heading fontSize={'2xl'} fontFamily={'body'} color="white">
+                                    Estágio em Engenharia
+                                </Heading>
+                                <Text
+                                    textAlign={'left'}
+                                    color='white'>
+                                    Nível: Estágio
+                                </Text>
                             </Stack>
-                        </Box> 
-                    </Center>
+                            <Stack
+                                alignItems={'center'}
+                                justifyContent={'center'}
+                            >
 
-                    <Center>
-                        <Box border="1px" borderColor="gray.700" borderStyle={'solid'} h="100px" w="60%" bg="black"
-                            borderRadius="lg" p="0.5rem" cursor="pointer">
-                                
+                                <Stack
+                                    width={'300px'}
+                                    mt={'2rem'}
+                                    direction={'row'}
+                                >
+                                    <Button
+                                        onClick={() => router.push('/formulario-vaga')}
+                                        flex={1}
+                                        fontSize={'sm'}
+                                        bg={'backgroundBlack.700'}
+                                        color={'green.600'}
+                                        border="1px" borderColor="gray.700" borderStyle={'solid'}
+                                        _hover={{
+                                            bg: 'gray.800',
+                                        }}
+                                        _focus={{
+                                            bg: 'gray.800',
+                                        }}>
+                                        Enviar Informações
+                                    </Button>
+                                </Stack>
+                            </Stack>
+                        </Stack>
+                    </Box>
+                </Center>
+
+                <Center >
+                    <Box mb="7rem" h="100px" w="60%" p="0.5rem">
+                        <Stack
+                            borderWidth="1px"
+                            borderRadius="lg"
+                            borderColor="gray.700"
+                            w='100%'
+                            height='200px'
+                            direction={{ base: 'column', md: 'row' }}
+                            bg={'backgroundBlack.700'}
+                            boxShadow={'2xl'}
+                            padding={4}>
+
                             <Stack
                                 flex={1}
+                                flexDirection="column"
                                 justifyContent="Center"
                                 alignItems="left"
-                                direction={{ base: 'column', md: 'row' }}
+                                p={1}
                                 pt={2}>
-                                    <Box>
-                                        <Heading fontSize={'2xl'} fontFamily={'body'} color="white">
-                                            Estágio em Front-End Dev
-                                        </Heading>
-                                        <Text color="white">Nível: Estágio</Text>
-                                    </Box>
-                                    
-
-                                        <Stack
-                                            width={'300px'}
-                                            mt={'2rem'}
-                                            direction={'row'}
-                                            justifyContent={'right'}
-                                            alignItems={'center'}
-                                        >
-                                            <Text color="yellow">Entrevista Marcada 30/11/2022 09:00</Text>
-                                        </Stack>
+                                <Heading fontSize={'2xl'} fontFamily={'body'} color="white">
+                                    Estágio em Front-End Dev
+                                </Heading>
+                                <Text
+                                    textAlign={'left'}
+                                    color='white'>
+                                    Nível: Estágio
+                                </Text>
                             </Stack>
-                        </Box> 
-                    </Center>
+                            <Stack
+                                alignItems={'center'}
+                                justifyContent={'center'}
+                            >
 
-                    <Center>
-                        <Box border="1px" borderColor="gray.700" borderStyle={'solid'} h="100px" w="60%" bg="black"
-                            borderRadius="lg" p="0.5rem" cursor="pointer">
-                                
+                                <Stack
+                                    width={'300px'}
+                                    mt={'2rem'}
+                                    direction={'row'}
+                                >
+                                    <Button
+                                        onClick={onOpenStatusEntrevista}
+                                        flex={1}
+                                        fontSize={'sm'}
+                                        bg={'backgroundBlack.700'}
+                                        color={'white'}
+                                        border="1px" borderColor="gray.700" borderStyle={'solid'}
+                                        _hover={{
+                                            bg: 'gray.800',
+                                        }}
+                                        _focus={{
+                                            bg: 'gray.800',
+                                        }}>
+                                        Acompanhe
+                                    </Button>
+
+                                    <Button
+                                        onClick={onOpenTime}
+                                        flex={1}
+                                        fontSize={'sm'}
+                                        bg={'backgroundBlack.700'}
+                                        color={'yellow.300'}
+                                        border="1px" borderColor="gray.700" borderStyle={'solid'}
+                                        _hover={{
+                                            bg: 'gray.800',
+                                        }}
+                                        _focus={{
+                                            bg: 'gray.800',
+                                        }}>
+                                        Entrevista Marcada
+                                    </Button>
+                                </Stack>
+                            </Stack>
+                        </Stack>
+                    </Box>
+                </Center>
+
+                <Center >
+                    <Box mb="7rem" h="100px" w="60%" p="0.5rem">
+                        <Stack
+                            borderWidth="1px"
+                            borderRadius="lg"
+                            borderColor="gray.700"
+                            w='100%'
+                            height='200px'
+                            direction={{ base: 'column', md: 'row' }}
+                            bg={'backgroundBlack.700'}
+                            boxShadow={'2xl'}
+                            padding={4}>
+
                             <Stack
                                 flex={1}
+                                flexDirection="column"
                                 justifyContent="Center"
                                 alignItems="left"
-                                direction={{ base: 'column', md: 'row' }}
+                                p={1}
                                 pt={2}>
-                                    <Box>
-                                        <Heading fontSize={'2xl'} fontFamily={'body'} color="white">
-                                            Project Management Office
-                                        </Heading>
-                                        <Text color="white">Nível: Sênior</Text>
-                                    </Box>
-                                    
-
-                                        <Stack
-                                            width={'300px'}
-                                            mt={'2rem'}
-                                            direction={'row'}
-                                            justifyContent={'right'}
-                                            alignItems={'center'}
-                                        >
-                                            <Text color="red">Fechado</Text>
-                                        </Stack>
+                                <Heading fontSize={'2xl'} fontFamily={'body'} color="white">
+                                    Project Management Office
+                                </Heading>
+                                <Text
+                                    textAlign={'left'}
+                                    color='white'>
+                                    Nível: Sênior
+                                </Text>
                             </Stack>
-                        </Box> 
-                    </Center>
+                            <Stack
+                                alignItems={'center'}
+                                justifyContent={'center'}
+                            >
 
-                    <Center >
-                        <Divider w="80%" mt="2rem"/>
-                    </Center>
+                                <Stack
+                                    width={'300px'}
+                                    mt={'2rem'}
+                                    direction={'row'}
+                                >
+                                    <Button
+                                        onClick={onOpenStatusFinal}
+                                        flex={1}
+                                        fontSize={'sm'}
+                                        bg={'backgroundBlack.700'}
+                                        color={'white'}
+                                        border="1px" borderColor="gray.700" borderStyle={'solid'}
+                                        _hover={{
+                                            bg: 'gray.800',
+                                        }}
+                                        _focus={{
+                                            bg: 'gray.800',
+                                        }}>
+                                        Acompanhe
+                                    </Button>
 
-                    <Center>
+                                    <Button
+                                        onClick={onOpenEnd}
+                                        flex={1}
+                                        fontSize={'sm'}
+                                        bg={'backgroundBlack.700'}
+                                        color={'red.500'}
+                                        border="1px" borderColor="gray.700" borderStyle={'solid'}
+                                        _hover={{
+                                            bg: 'gray.800',
+                                        }}
+                                        _focus={{
+                                            bg: 'gray.800',
+                                        }}>
+                                        Fechado
+                                    </Button>
+                                </Stack>
+                            </Stack>
+                        </Stack>
+                    </Box>
+                </Center>
+
+                <Center >
+                    <Divider w="70%" mt="2rem" />
+                </Center>
+
+                <Center>
                     <Box w="60%" mr="4" rounded='md' text-align='center' mt="3rem" mb="2rem">
                         <Heading fontSize="24px" color="white">Sugestões de Vagas</Heading>
                     </Box >
                 </Center>
-                        
-            </Stack>
-                
 
-                
-                
+                <Center >
+                    <Box mb="7rem" h="100px" w="60%" p="0.5rem">
+                        <Stack
+                            borderWidth="1px"
+                            borderRadius="lg"
+                            borderColor="gray.700"
+                            w='100%'
+                            height='200px'
+                            direction={{ base: 'column', md: 'row' }}
+                            bg={'backgroundBlack.700'}
+                            boxShadow={'2xl'}
+                            padding={4}>
+
+                            <Stack
+                                flex={1}
+                                flexDirection="column"
+                                justifyContent="Center"
+                                alignItems="left"
+                                p={1}
+                                pt={2}>
+                                <Heading fontSize={'2xl'} fontFamily={'body'} color="white">
+                                    Estágio User Experience
+                                </Heading>
+                                <Text
+                                    textAlign={'left'}
+                                    color='white'>
+                                    Nível: Estágio
+                                </Text>
+                            </Stack>
+                            <Stack
+                                alignItems={'center'}
+                                justifyContent={'center'}
+                            >
+
+                                <Stack
+                                    width={'300px'}
+                                    mt={'2rem'}
+                                    direction={'row'}
+                                >
+                                    <Button
+                                        onClick={() => router.push('/vaga-ux')}
+                                        flex={1}
+                                        fontSize={'sm'}
+                                        bg={'backgroundBlack.700'}
+                                        color={'yellowPrimary.800'}
+                                        border="1px" borderColor="gray.700" borderStyle={'solid'}
+                                        _hover={{
+                                            bg: 'gray.800',
+                                        }}
+                                        _focus={{
+                                            bg: 'gray.800',
+                                        }}>
+                                        Ver Vaga
+                                    </Button>
+                                </Stack>
+                            </Stack>
+                        </Stack>
+                    </Box>
+                </Center>
+
+                <Modal onClose={onCloseEnd} isOpen={isOpenEnd} isCentered>
+                    <ModalOverlay />
+                    <ModalContent>
+                        <ModalHeader>Project Management Office</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            <Text>Olá, tudo bem?</Text>
+                            <Text mb="2rem">Infelizmente o seu perfil não foi compatível com a vaga, mas não se desanime, você pode continuar se inscrevendo para a vaga.</Text>
+                            <Text as='b' mt="2rem">Status:</Text>
+                            <Text color={'red.500'}>Fechado</Text>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button onClick={onCloseEnd} bg={'yellowPrimary.800'}
+                                color={'black'}
+                                boxShadow={
+                                    '0px 1px 25px -5px rgb(247 244 30 / 48%), 0 10px 10px -5px rgb(247 244 30 / 43%)'
+                                }
+                                _hover={{
+                                    bg: 'yellowPrimary.500',
+                                }}
+                                _focus={{
+                                    bg: 'yellowPrimary.500',
+                                }}>Fechar</Button>
+                        </ModalFooter>
+                    </ModalContent>
+                </Modal>
+
+                <Modal onClose={onCloseTime} isOpen={isOpenTime} isCentered>
+                    <ModalOverlay />
+                    <ModalContent>
+                        <ModalHeader>Estágio em Front-End Dev</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            <Flex mt="1rem" mb="1rem">
+                                <Text mr="0.5rem">Dia: </Text>
+                                <Text as="b">16/06/2022</Text>
+                            </Flex>
+
+                            <Flex mb="1rem">
+                                <Text mr="0.5rem">Hora: </Text>
+                                <Text as="b">09:00</Text>
+                            </Flex>
+
+                            <Flex mb="1rem">
+                                <Text mr="0.5rem">Local: </Text>
+                                <Text as="u" color="blue" cursor="pointer">www.callmeeting.com/wrtjd</Text>
+                            </Flex>
+
+                            <Text as='b'>Status:</Text>
+                            <Text color={'yellow.400'}>Entrevista com o gestor</Text>
+
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button
+                                onClick={onCloseTime}
+                                flex={1}
+                                fontSize={'sm'}
+                                bg={'yellowPrimary.800'}
+                                color={'black'}
+                                boxShadow={
+                                    '0px 1px 25px -5px rgb(247 244 30 / 48%), 0 10px 10px -5px rgb(247 244 30 / 43%)'
+                                }
+                                _hover={{
+                                    bg: 'yellowPrimary.500',
+                                }}
+                                _focus={{
+                                    bg: 'yellowPrimary.500',
+                                }}>
+                                Acessar
+                            </Button>
+                        </ModalFooter>
+                    </ModalContent>
+                </Modal>
+
+                <Modal onClose={onCloseStatusEntrevista} size={'xl'} isOpen={isOpenStatusEntrevista} isCentered>
+                    <ModalOverlay />
+                    <ModalContent>
+                        <ModalHeader>Acompanhe seu processo!</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            <Center>
+                                <Progress w="100%" value={68} size='xs' colorScheme="yellow" mb="2rem" />
+                            </Center>
+
+                            <Box>
+                                <Flex>
+                                    <Text>Análise de Currículo</Text>
+                                    <Text>Realizar Atividades</Text>
+                                    <Text>Entrevista RH</Text>
+                                    <Text color={'yellow.600'}>Entrevista Gestor</Text>
+                                    <Text>Resposta Final</Text>
+                                </Flex>
+                            </Box>
+
+                            <Center>
+                                <Box mt="3rem" mb="3rem">
+                                    <Text ml="11rem">Status:</Text>
+                                    <Heading color="yellow.600">Entrevista com o Gestor</Heading>
+                                </Box>
+                            </Center>
+
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button onClick={onCloseStatusEntrevista} bg={'yellowPrimary.800'}
+                                color={'black'}
+                                boxShadow={
+                                    '0px 1px 25px -5px rgb(247 244 30 / 48%), 0 10px 10px -5px rgb(247 244 30 / 43%)'
+                                }
+                                _hover={{
+                                    bg: 'yellowPrimary.500',
+                                }}
+                                _focus={{
+                                    bg: 'yellowPrimary.500',
+                                }}>Fechar</Button>
+
+                        </ModalFooter>
+                    </ModalContent>
+                </Modal>
+
+
+                <Modal onClose={onCloseStatusFinal} size={'xl'} isOpen={isOpenStatusFinal} isCentered>
+                    <ModalOverlay />
+                    <ModalContent>
+                        <ModalHeader>Acompanhe seu processo!</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            <Center>
+                                <Progress w="100%" value={100} size='xs' colorScheme="yellow" mb="2rem" />
+                            </Center>
+
+                            <Box>
+                                <Flex>
+                                    <Text>Análise de Currículo</Text>
+                                    <Text>Realizar Atividades</Text>
+                                    <Text>Entrevista RH</Text>
+                                    <Text>Entrevista Gestor</Text>
+                                    <Text color={'yellow.600'}>Resposta Final</Text>
+                                </Flex>
+                            </Box>
+
+                            <Center>
+                                <Box mt="3rem" mb="3rem">
+                                    <Text ml="3rem">Status:</Text>
+                                    <Heading color="red.500">Fechado</Heading>
+                                </Box>
+                            </Center>
+
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button onClick={onCloseStatusFinal} bg={'yellowPrimary.800'}
+                                color={'black'}
+                                boxShadow={
+                                    '0px 1px 25px -5px rgb(247 244 30 / 48%), 0 10px 10px -5px rgb(247 244 30 / 43%)'
+                                }
+                                _hover={{
+                                    bg: 'yellowPrimary.500',
+                                }}
+                                _focus={{
+                                    bg: 'yellowPrimary.500',
+                                }}>Fechar</Button>
+
+                        </ModalFooter>
+                    </ModalContent>
+                </Modal>
+            </Stack>
+
+
+
 
         </>
     )

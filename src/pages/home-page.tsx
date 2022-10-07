@@ -35,19 +35,32 @@ export default function HomePage() {
                         overflow={'hidden'}
                         mb="2rem"
                         borderRadius="lg"
-                        backgroundImage={"/images/pug.jpg"}
-                        bgPosition={'center'}>
+                        backgroundImage={"/images/pug8.png"}
+                        bgPosition={'center'}
+                        
+                                        boxShadow={
+                                            '0px 2px 25px -5px rgb(247 244 30 / 48%), 0 10px 10px -5px rgb(247 244 30 / 43%)'
+                                        }
+                                        >
 
                     </Box>
 
                     <Box pb="1rem" cursor="pointer">
                         <Stack
-                            bg="yellowPrimary.800"
+                            bg={'yellowPrimary.800'}
+                            boxShadow={
+                                '0px 1px 25px -5px rgb(247 244 30 / 48%), 0 10px 10px -5px rgb(247 244 30 / 43%)'
+                            }
+                            _hover={{
+                                bg: 'yellowPrimary.500',
+                            }}
+                            _focus={{
+                                bg: 'yellowPrimary.500',
+                            }}
                             borderRadius="lg"
                             w='50%'
                             height='100px'
                             direction={{ base: 'column', md: 'row' }}
-                            boxShadow={'2xl'}
                             padding={4}>
                             <Stack
                                 flex={1}
@@ -76,12 +89,20 @@ export default function HomePage() {
 
                     <Box pb="1rem" cursor="pointer">
                         <Stack
-                            bg="yellowPrimary.800"
+                            bg={'yellowPrimary.800'}
+                            boxShadow={
+                                '0px 1px 25px -5px rgb(247 244 30 / 48%), 0 10px 10px -5px rgb(247 244 30 / 43%)'
+                            }
+                            _hover={{
+                                bg: 'yellowPrimary.500',
+                            }}
+                            _focus={{
+                                bg: 'yellowPrimary.500',
+                            }}
                             borderRadius="lg"
                             w='50%'
                             height='100px'
                             direction={{ base: 'column', md: 'row' }}
-                            boxShadow={'2xl'}
                             padding={4}>
                             <Stack
                                 flex={1}
@@ -110,16 +131,24 @@ export default function HomePage() {
 
                     <Box pb="1rem" cursor="pointer">
                         <Stack
-                            bg="yellowPrimary.800"
+                            bg={'yellowPrimary.800'}
+                            boxShadow={
+                                '0px 1px 25px -5px rgb(247 244 30 / 48%), 0 10px 10px -5px rgb(247 244 30 / 43%)'
+                            }
+                            _hover={{
+                                bg: 'yellowPrimary.500',
+                            }}
+                            _focus={{
+                                bg: 'yellowPrimary.500',
+                            }}
                             borderRadius="lg"
                             w='50%'
                             height='100px'
                             direction={{ base: 'column', md: 'row' }}
-                            boxShadow={'2xl'}
                             padding={4}>
                             <Stack
                                 flex={1}
-                                
+                                onClick={() => router.push('/vagas')}
                                 justifyContent="Center"
                                 alignItems="left"
                                 p={1}

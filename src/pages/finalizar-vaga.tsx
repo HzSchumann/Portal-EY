@@ -47,7 +47,17 @@ export default function MinhasVagas() {
                 </Center>
 
                 <Center>
-                    <Button mt="2rem" w="60%" bg="yellowPrimary.800" color="white" onClick={() => router.push('/home-page')}>Continuar</Button>
+                    <Button mt="2rem" w="60%" bg={'yellowPrimary.800'}
+                                        color={'black'}
+                                        boxShadow={
+                                            '0px 1px 25px -5px rgb(247 244 30 / 48%), 0 10px 10px -5px rgb(247 244 30 / 43%)'
+                                        }
+                                        _hover={{
+                                            bg: 'yellowPrimary.500',
+                                        }}
+                                        _focus={{
+                                            bg: 'yellowPrimary.500',
+                                        }} onClick={() => router.push('/home-page')}>Continuar</Button>
                 </Center>
 
 

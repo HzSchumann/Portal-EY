@@ -24,28 +24,33 @@ export default function UserProfileEdit(): JSX.Element {
         <>
         <LogedHeader>
         </LogedHeader>
+        
         <Flex
             minH={'100vh'}
             align={'center'}
+            bg={"backgroundBlack.700"}
             justify={'center'}
-            bg={useColorModeValue('gray.50', 'gray.800')}>
+            >
                 <Stack
                     spacing={4}
                     w={'full'}
                     maxW={'md'}
-                    bg={useColorModeValue('white', 'gray.700')}
+                    bg={"backgroundBlack.700"}
                     rounded={'xl'}
                     boxShadow={'lg'}
+                    borderWidth="1px"
+                    borderRadius="lg"
+                    borderColor="gray.700"
                     p={6}
                     my={12}>
-                    <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl' }}>
-                        User Profile Edit
+                    <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl' }} color="white">
+                        Editar perfil
                     </Heading>
                     <FormControl id="userName">
                         <FormLabel>User Icon</FormLabel>
                         <Stack direction={['column', 'row']} spacing={6}>
                             <Center>
-                                <Avatar size="xl" src="https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9">
+                                <Avatar size="xl" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80">
                                     <AvatarBadge
                                         as={IconButton}
                                         size="sm"
@@ -57,50 +62,65 @@ export default function UserProfileEdit(): JSX.Element {
                                 </Avatar>
                             </Center>
                             <Center w="full">
-                                <Button w="full">Change Icon</Button>
+                                <Button w="full">Mudar Avatar</Button>
                             </Center>
                         </Stack>
                     </FormControl>
                     <FormControl id="userName" isRequired>
-                        <FormLabel>User name</FormLabel>
+                        <FormLabel color={"white"}>Usuário</FormLabel>
                         <Input
-                            placeholder="UserName"
+                            color={"white"}
+                            placeholder="Usuário"
                             _placeholder={{ color: 'gray.500' }}
                             type="text" />
                     </FormControl>
                     <FormControl id="email" isRequired>
-                        <FormLabel>Email address</FormLabel>
+                        <FormLabel color={"white"}>E-mail</FormLabel>
                         <Input
-                            placeholder="your-email@example.com"
+                            color={"white"}
+                            placeholder="E-mail"
                             _placeholder={{ color: 'gray.500' }}
                             type="email" />
                     </FormControl>
                     <FormControl id="password" isRequired>
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel color={"white"}>Senha</FormLabel>
                         <Input
-                            placeholder="password"
+                            color={"white"}
+                            placeholder="Senha"
                             _placeholder={{ color: 'gray.500' }}
                             type="password" />
                     </FormControl>
                     <Stack spacing={6} direction={['column', 'row']}>
                         <Button
                             onClick={() => router.push('/home-page')}
-                            bg={'red.400'}
-                            color={'white'}
                             w="full"
+                            bg={'red.500'}
+                            color={'black'}
+                            boxShadow={
+                                '235 64 52 -5px rgb(247 244 30 / 48%), 235 64 52 -5px rgb(247 244 30 / 43%)'
+                            }
                             _hover={{
-                                bg: 'red.500',
+                                bg: 'red.200',
+                            }}
+                            _focus={{
+                                bg: 'red.200',
                             }}>
-                            Cancel
+                            Cancelar
                         </Button>
                         <Button
-                            bg={'blue.400'}
-                            color={'white'}
                             w="full"
+                            bg={'yellowPrimary.800'}
+                            color={'black'}
+                            boxShadow={
+                                '0px 1px 25px -5px rgb(247 244 30 / 48%), 0 10px 10px -5px rgb(247 244 30 / 43%)'
+                            }
                             _hover={{
-                                bg: 'blue.500',
+                                bg: 'yellowPrimary.500',
+                            }}
+                            _focus={{
+                                bg: 'yellowPrimary.500',
                             }}>
-                            Submit
+                            Salvar
                         </Button>
                     </Stack>
                 </Stack>

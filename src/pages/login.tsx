@@ -63,7 +63,7 @@ var nomeUser;
             minH={'100vh'}
             align={'center'}
             justify={'center'}
-            backgroundImage={"/images/loginbg.jpg"}
+            bg={"backgroundBlack.700"}
             bgPosition={'center'}
             bgRepeat="no-repeat"
         >
@@ -76,31 +76,34 @@ var nomeUser;
                     </Stack>
                     <Box
                         rounded={'lg'}
-                        bg={useColorModeValue('white', 'gray.700')}
+                        bg={"backgroundBlack.700"}
                         boxShadow={'lg'}
+                        borderWidth="1px"
+                        borderRadius="lg"
+                        borderColor="gray.700"
                         p={8}>
                         <Stack spacing={4}>
                             <FormControl id="email">
-                                <FormLabel>Email</FormLabel>
-                                <Input type="email" />
+                                <FormLabel color="white">Email</FormLabel>
+                                <Input color="white" type="email" />
                             </FormControl>
                             <FormControl id="password">
-                                <FormLabel>Senha</FormLabel>
-                                <Input type="password" />
+                                <FormLabel color="white">Senha</FormLabel>
+                                <Input color="white" type="password" />
                             </FormControl>
                             <Stack spacing={10}>
                                 <Stack
                                     direction={{ base: 'column', sm: 'row' }}
                                     align={'start'}
                                     justify={'space-between'}>
-                                    <Checkbox>Lembrar de mim</Checkbox>
-                                    <Link color={'blue.400'} onClick={() => router.push('/cadastro')}>Esqueceu a senha?</Link>
+                                    <Checkbox color={"white"}>Lembrar de mim</Checkbox>
+                                    <Link color={'yellowPrimary.800'} onClick={() => router.push('/cadastro')}>Esqueceu a senha?</Link>
                                 </Stack>
                                 <Button
-                                    bg={'blue.400'}
+                                    bg={'yellowPrimary.800'}
                                     color={'white'}
                                     _hover={{
-                                        bg: 'blue.500',
+                                        bg: 'yellowPrimary.500',
                                     }}
                                     onClick={() => addUser()}
                                     
