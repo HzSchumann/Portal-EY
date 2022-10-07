@@ -51,12 +51,12 @@ export default function HomePage() {
                             padding={4}>
                             <Stack
                                 flex={1}
-                                
+                                onClick={() => router.push('/minhas-vagas')}
                                 justifyContent="Center"
                                 alignItems="left"
                                 p={1}
                                 pt={2}>
-                                <Heading fontSize={'2xl'} fontFamily={'body'} color="white">
+                                <Heading fontSize={'2xl'} fontFamily={'body'} color="black">
                                     Ver meus processos seletivos
                                 </Heading>
                             </Stack>
@@ -67,7 +67,41 @@ export default function HomePage() {
                                     justifyContent={'right'}
                                     alignItems={'center'}
                                 >
-                                    <Icon color="white" w={8} h={8}>
+                                    <Icon color="black" w={8} h={8}>
+                                        <ArrowForwardIcon />
+                                    </Icon>
+                                </Stack>
+                            </Stack>
+                    </Box>
+
+                    <Box pb="1rem" cursor="pointer">
+                        <Stack
+                            bg="yellowPrimary.800"
+                            borderRadius="lg"
+                            w='50%'
+                            height='100px'
+                            direction={{ base: 'column', md: 'row' }}
+                            boxShadow={'2xl'}
+                            padding={4}>
+                            <Stack
+                                flex={1}
+                                onClick={() => router.push('/cursos')}
+                                justifyContent="Center"
+                                alignItems="left"
+                                p={1}
+                                pt={2}>
+                                <Heading fontSize={'2xl'} fontFamily={'body'} color="black">
+                                    Ver cursos
+                                </Heading>
+                            </Stack>
+                                <Stack
+                                    width={'300px'}
+                                    mt={'2rem'}
+                                    direction={'row'}
+                                    justifyContent={'right'}
+                                    alignItems={'center'}
+                                >
+                                    <Icon color="black" w={8} h={8}>
                                         <ArrowForwardIcon />
                                     </Icon>
                                 </Stack>
@@ -90,8 +124,8 @@ export default function HomePage() {
                                 alignItems="left"
                                 p={1}
                                 pt={2}>
-                                <Heading fontSize={'2xl'} fontFamily={'body'} color="white">
-                                    Ver meus cursos
+                                <Heading fontSize={'2xl'} fontFamily={'body'} color="black">
+                                    Ver vagas
                                 </Heading>
                             </Stack>
                                 <Stack
@@ -101,7 +135,7 @@ export default function HomePage() {
                                     justifyContent={'right'}
                                     alignItems={'center'}
                                 >
-                                    <Icon color="white" w={8} h={8}>
+                                    <Icon color="black" w={8} h={8}>
                                         <ArrowForwardIcon />
                                     </Icon>
                                 </Stack>

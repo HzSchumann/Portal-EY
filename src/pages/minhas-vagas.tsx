@@ -1,4 +1,4 @@
-import { Heading, Flex, Avatar, Spacer, Text, Box } from "@chakra-ui/react";
+import { Heading, Flex, Avatar, Spacer, Text, Box, Divider } from "@chakra-ui/react";
 import { Icon, GridItem, Stack } from '@chakra-ui/react'
 import { Button, ButtonGroup, Center } from '@chakra-ui/react'
 import router from "../../node_modules/next/router";
@@ -115,6 +115,16 @@ export default function MinhasVagas() {
                             </Stack>
                         </Box> 
                     </Center>
+
+                    <Center >
+                        <Divider w="80%" mt="2rem"/>
+                    </Center>
+
+                    <Center>
+                    <Box w="60%" mr="4" rounded='md' text-align='center' mt="3rem" mb="2rem">
+                        <Heading fontSize="24px" color="white">Sugestões de Vagas</Heading>
+                    </Box >
+                </Center>
                         
             </Stack>
                 

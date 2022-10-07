@@ -29,7 +29,7 @@ export default function Home() {
               >
                 <br />{' '}
                 <Text color={'yellowPrimary.800'} as={'span'}>
-                  Olá, bem-vindx
+                  Olá, bem-vindo(a)
                 </Text>{' '}
                 <Text color="white">
                   Encontre ajuda para seu sucesso

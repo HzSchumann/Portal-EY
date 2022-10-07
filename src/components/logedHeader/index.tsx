@@ -13,11 +13,14 @@ import {
     MenuDivider,
     useDisclosure,
     useColorModeValue,
-    Stack,
+    InputGroup,
     Image,
+    Input,
+    InputRightElement,
 
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { Search2Icon } from '@chakra-ui/icons';
 import { AiOutlineHome, AiOutlinePlayCircle, AiOutlineFileText } from "react-icons/ai";
 
 
@@ -41,6 +44,23 @@ export function LogedHeader() {
                         </Box>
                         
                     </HStack>
+
+                    <Flex alignItems={'center'}>
+                            {/* <Input w="600px" variant='filled' placeholder='Buscar' /> */}
+                            <InputGroup size='md'>
+                                <Input
+                                    bg='gray.700'
+                                    pr='4.5rem'
+                                    w="600px"
+                                    variant='filled'
+                                    placeholder='Buscar'
+                                />
+                                <InputRightElement width='4.5rem'>
+                                    <Button bg='gray.600' leftIcon={<Search2Icon />} h='1.75rem' size='sm' onClick={() => router.push('/cursos')}></Button>
+                                </InputRightElement>
+                            </InputGroup>
+                    </Flex>
+
                     <Flex alignItems={'center'}>
                         <IconButton
                             bg="gray.700"
@@ -56,8 +76,8 @@ export function LogedHeader() {
                             bg="gray.700"
                             size={'lg'}
                             mr='1rem'
-                            aria-label={'Propostas'}
-                            onClick={() => router.push('/propostas')}
+                            aria-label={'Meus Cursos'}
+                            onClick={() => router.push('/meus_cursos')}
                         >
                             <Icon as={AiOutlinePlayCircle} color="white"></Icon>
                         </IconButton>
