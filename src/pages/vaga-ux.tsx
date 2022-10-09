@@ -31,7 +31,7 @@ export default function EstagFront() {
         };
 
         await setDoc(doc(db, "MinhasVagas", `Empresa ${new URLSearchParams(window.location.search).get("name")}`), docData);
-        router.push('/minhas-vagas');
+        router.push('/curriculo');
     }
 
     return (

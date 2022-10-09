@@ -73,7 +73,7 @@ export default function Vagas() {
                                 <Text
                                     textAlign={'left'}
                                     color={useColorModeValue('white', 'gray.400')}>
-                                    Nível: Estágio
+                                    Nível: {props.proposta.nivel}
                                 </Text>
                             </Stack>
                             <Stack
