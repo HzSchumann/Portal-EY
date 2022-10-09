@@ -50,7 +50,7 @@ export default function UserProfileEdit(): JSX.Element {
                         <FormLabel>User Icon</FormLabel>
                         <Stack direction={['column', 'row']} spacing={6}>
                             <Center>
-                                <Avatar size="xl" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80">
+                                <Avatar size="xl" src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=689&q=80">
                                     <AvatarBadge
                                         as={IconButton}
                                         size="sm"
